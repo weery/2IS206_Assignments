@@ -1,0 +1,25 @@
+Multiply all with 40000 elements in ArrayList. Sum: 16199430000 Time: 853
+Multiply all with 80000 elements in ArrayList. Sum: 64798860000 Time: 3310
+Multiply all with 120000 elements in ArrayList. Sum: 145798290000 Time: 7590
+Multiply all with 160000 elements in ArrayList. Sum: 259197720000 Time: 13552
+Multiply all with 200000 elements in ArrayList. Sum: 404997150000 Time: 20267
+Multiply all with 1000 elements in LinkedList. Sum: 10110750 Time: 287
+Multiply all with 1500 elements in LinkedList. Sum: 22759875 Time: 984
+Multiply all with 2000 elements in LinkedList. Sum: 40471500 Time: 2372
+Multiply all with 2500 elements in LinkedList. Sum: 63245625 Time: 4758
+Multiply all with 3000 elements in LinkedList. Sum: 91082250 Time: 8293
+Multiply some with 100000000 elements in ArrayList. Sum: 600000000 Time: 107
+Multiply some with 150000000 elements in ArrayList. Sum: 900000000 Time: 153
+Multiply some with 200000000 elements in ArrayList. Sum: 1200000000 Time: 230
+Multiply some with 250000000 elements in ArrayList. Sum: 1500000000 Time: 292
+java.lang.OutOfMemoryError: Java heap space
+	at java.base/java.util.Arrays.copyOf(Arrays.java:3720)
+	at java.base/java.util.Arrays.copyOf(Arrays.java:3689)
+	at java.base/java.util.ArrayList.toArray(ArrayList.java:400)
+	at java.base/java.util.ArrayList.<init>(ArrayList.java:179)
+	at part_1.assignment_3.AlgoAssignment1.main(AlgoAssignment1.java:66)
+Multiply some with 50000 elements in LinkedList. Sum: 300000 Time: 808
+Multiply some with 100000 elements in LinkedList. Sum: 600000 Time: 3296
+Multiply some with 150000 elements in LinkedList. Sum: 900000 Time: 7666
+Multiply some with 200000 elements in LinkedList. Sum: 1200000 Time: 14184
+Multiply some with 250000 elements in LinkedList. Sum: 1500000 Time: 24246

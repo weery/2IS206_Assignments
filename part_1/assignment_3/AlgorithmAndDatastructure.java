@@ -29,7 +29,11 @@ public class AlgorithmAndDatastructure {
 		 * with the first element from the end, the second element from the 
 		 * beginning with the second element from the end etc. Increase the variable
 		 * sum with the result of each multiplication.  
-		 */				
+		 */
+		for (int i = 0, j = numberList.size()-1;   i < j; i++, j--){
+			sum += numberList.get(i) * numberList.get(j);
+		}
+
 			
 		return sum;		
 	}	
@@ -46,8 +50,13 @@ public class AlgorithmAndDatastructure {
 		/* TODO: Write code that multiplies all elements in the List
 		 * with all the other elements. Increase the variable
 		 * sum with the result of each multiplication.  
-		 */			
-		
+		 */
+		for (int i = 0; i < numberList.size() -1; i++){
+			for (int j = i+1; j < numberList.size(); j++){
+				sum += numberList.get(i) * numberList.get(j);
+			}
+		}
+
 		return sum;		
 	}
 }

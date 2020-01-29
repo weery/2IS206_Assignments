@@ -16,7 +16,7 @@ import java.util.List;
 public class AlgoSorting {
 
 	private static final int NUMBER_OF_ITERATIONS = 30;
-	private static final String SAVE_LOCATION = "2IS206_Utilities\\python\\assignment_4_tmp\\";
+	private static final String SAVE_LOCATION = "2IS206_Utilities\\python\\assignment_4\\";
 	/**
 	 * Program entry point. Invokes sorting algorithms with different sizes.
 	 * @param args not used.
@@ -110,14 +110,13 @@ public class AlgoSorting {
 		elements.clear();
 
 		for(int i = 0; i < numberOfElements.length; i ++) {
+			dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
 			elements.add(numberOfElements[i]);
-			time = 0;
+			stopWatch.start();
 			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
-				dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
-				stopWatch.start();
 				sortingAlgorithm.sort(dataStructure);
-				time += stopWatch.stop();
 			}
+			time = stopWatch.stop();
 			System.out.println("Sorting " + numberOfElements[i] + " elements using JavaAPI sort. Time: " + time/NUMBER_OF_ITERATIONS);
 			times.add(time/NUMBER_OF_ITERATIONS);
 		}

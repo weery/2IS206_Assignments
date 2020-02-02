@@ -1,11 +1,10 @@
-package part_1.assignment_3;
+package assignment_3;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import com.sun.source.doctree.SummaryTree;
 import util.NumberCreator;
 import util.StopWatch;
 /**

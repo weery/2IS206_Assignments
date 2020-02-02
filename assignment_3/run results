@@ -17,7 +17,7 @@ java.lang.OutOfMemoryError: Java heap space
 	at java.base/java.util.Arrays.copyOf(Arrays.java:3689)
 	at java.base/java.util.ArrayList.toArray(ArrayList.java:400)
 	at java.base/java.util.ArrayList.<init>(ArrayList.java:179)
-	at part_1.assignment_3.AlgoAssignment1.main(AlgoAssignment1.java:66)
+	at assignment_3.AlgoAssignment1.main(AlgoAssignment1.java:66)
 Multiply some with 50000 elements in LinkedList. Sum: 300000 Time: 808
 Multiply some with 100000 elements in LinkedList. Sum: 600000 Time: 3296
 Multiply some with 150000 elements in LinkedList. Sum: 900000 Time: 7666

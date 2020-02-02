@@ -1,4 +1,4 @@
-package part_1.assignment_2;
+package assignment_2;
 
 /**
  * A stack represents a last-in-first-out (LIFO) stack of elements.

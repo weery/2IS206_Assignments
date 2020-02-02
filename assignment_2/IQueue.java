@@ -1,4 +1,4 @@
-package part_1.assignment_2;
+package assignment_2;
 
 /**
  * A queue typically, but not necessarily, order elements in a first-in-first-out

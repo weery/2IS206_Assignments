@@ -1,7 +1,4 @@
-package part_1.assignment_2;
-
-import java.lang.reflect.Array;
-import java.util.List;
+package assignment_2;
 
 public class SingleLinkedList<T> implements ISingleLinkedList<T> {
 

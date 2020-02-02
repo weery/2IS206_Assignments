@@ -1,4 +1,4 @@
-package part_1.assignment_3;
+package assignment_3;
 
 import java.util.List;
 

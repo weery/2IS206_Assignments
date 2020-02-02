@@ -1,4 +1,4 @@
-package part_1.assignment_2;
+package assignment_2;
 
 /**
  * A list constitutes an ordered collection of elements. The user can add,

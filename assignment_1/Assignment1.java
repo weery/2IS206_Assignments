@@ -1,4 +1,4 @@
-package part_1.assignment_1;
+package assignment_1;
 
 /**
  * First programming assignment in course "Algoritmer och datastrukturer"

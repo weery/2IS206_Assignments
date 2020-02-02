@@ -1,4 +1,4 @@
-package part_2.assignment_4;
+package assignment_4;
 
 import util.NumberCreator;
 import util.StopWatch;

@@ -35,77 +35,76 @@ public class AlgoAssignment1 {
 		/* 
 		 * Testing the method multiplyAll with different number of elements
 		 * using the data structure ArrayList. 
-		 */		
-		numberOfElements = new int[] {2500, 5000, 10000, 20000, 40000, 80000, 120000, 160000, 200000};
+		 */
+		numberOfElements = new int[]{2500, 5000, 10000, 20000, 40000, 80000, 120000, 160000, 200000};
 		outputName = "multiplyAll_ArrayList.csv";
 		times.clear();
 		elements.clear();
-		
-		for(int i = 0; i < numberOfElements.length; i ++) {
+
+		for (int i = 0; i < numberOfElements.length; i++) {
 			//dataStructure = new ArrayList<Integer>(NumberCreator.createNumberList(numberOfElements[i]));
 			dataStructure = NumberCreator.createNumberArray(numberOfElements[i], false);
 			elements.add(numberOfElements[i]);
 			stopWatch.start();
-			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+			for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
 				sum = test.multiplyAll(dataStructure);
 			}
 			time = stopWatch.stop();
-			System.out.println("Multiply all with " + numberOfElements[i] + " elements in ArrayList. Sum: " + sum + " Time: " + time / (NUMBER_OF_ITERATIONS) );
-			times.add(time/ (NUMBER_OF_ITERATIONS));
+			System.out.println("Multiply all with " + numberOfElements[i] + " elements in ArrayList. Sum: " + sum + " Time: " + time / (NUMBER_OF_ITERATIONS));
+			times.add(time / (NUMBER_OF_ITERATIONS));
 		}
-		writeToCsv(times, elements,outputName );
-		
-		/* 
+		writeToCsv(times, elements, outputName);
+
+		/*
 		 * Testing the method multiplyAll with different number of elements
-		 * using the data structure LinkedList. 
-		 */		
-		numberOfElements = new int[] {500, 1000, 1500, 2000, 2500, 3000, 3500};
+		 * using the data structure LinkedList.
+		 */
+		numberOfElements = new int[]{500, 1000, 1500, 2000, 2500, 3000, 3500};
 		outputName = "multiplyAll_LinkedList.csv";
 		times.clear();
 		elements.clear();
-		
-		for(int i = 0; i < numberOfElements.length; i ++) {
+
+		for (int i = 0; i < numberOfElements.length; i++) {
 			//dataStructure = new LinkedList<Integer>(NumberCreator.createNumberList(numberOfElements[i]));
 			dataStructure = NumberCreator.createNumberArray(numberOfElements[i], true);
 			elements.add(numberOfElements[i]);
 			stopWatch.start();
-			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+			for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
 				sum = test.multiplyAll(dataStructure);
 			}
-			time = stopWatch.stop();		
+			time = stopWatch.stop();
 			System.out.println("Multiply all with " + numberOfElements[i] + " elements in LinkedList. Sum: " + sum + " Time: " + time / NUMBER_OF_ITERATIONS);
-			times.add(time/NUMBER_OF_ITERATIONS);
+			times.add(time / NUMBER_OF_ITERATIONS);
 		}
-		writeToCsv(times, elements,outputName );
-		
-		/* 
+		writeToCsv(times, elements, outputName);
+
+		/*
 		 * Testing the method multiplySome with different number of elements
-		 * using the data structure ArrayList. 
-		 */	
-		numberOfElements = new int[] {50000000, 100000000, 150000000,
+		 * using the data structure ArrayList.
+		 */
+		numberOfElements = new int[]{50000000, 100000000, 150000000,
 				200000000, 250000000, 300000000, 350000000, 400000000};
 
 		outputName = "multiplySome_ArrayList.csv";
 		times.clear();
 		elements.clear();
-		for(int i = 0; i < numberOfElements.length; i ++) {
+		for (int i = 0; i < numberOfElements.length; i++) {
 			try {
 				//dataStructure = new ArrayList<Integer>(NumberCreator.createNumberList(numberOfElements[i]));
 				dataStructure = NumberCreator.createNumberArray(numberOfElements[i], false);
 				elements.add(numberOfElements[i]);
 				stopWatch.start();
-				for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+				for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
 					sum = test.multiplySome(dataStructure);
 				}
 				time = stopWatch.stop();
-				System.out.println("Multiply some with " + numberOfElements[i] + " elements in ArrayList. Sum: " + sum + " Time: " + time/ NUMBER_OF_ITERATIONS);
-				times.add(time/NUMBER_OF_ITERATIONS);
-			} catch (OutOfMemoryError  e){
+				System.out.println("Multiply some with " + numberOfElements[i] + " elements in ArrayList. Sum: " + sum + " Time: " + time / NUMBER_OF_ITERATIONS);
+				times.add(time / NUMBER_OF_ITERATIONS);
+			} catch (OutOfMemoryError e) {
 				e.printStackTrace();
 			}
 		}
-		writeToCsv(times, elements,outputName );
-	
+		writeToCsv(times, elements, outputName);
 		/* 
 		 * Testing the method multiplySome with different number of elements
 		 * using the data structure LinkedList. 

@@ -31,16 +31,16 @@ public class AlgoAssignment1SmallSize {
 		 * 12 000 elements -> Sum: 1 457 829 000
 		 * 16 000 elements -> Sum: 2 591 772 000
 		 * 20 000 elements -> Sum: 4 049 715 000
-		 */		
-		numberOfElements = new int[] {4000, 8000, 12000, 16000, 20000};
-		
-		for(int i = 0; i < numberOfElements.length; i ++) {	
+		 */
+		numberOfElements = new int[]{4000, 8000, 12000, 16000, 20000};
+
+		for (int i = 0; i < numberOfElements.length; i++) {
 			dataStructure = new ArrayList<Integer>(NumberCreator.createNumberList(numberOfElements[i]));
-			stopWatch.start();		
-			sum = test.multiplyAll(dataStructure);	
-			time = stopWatch.stop();		
+			stopWatch.start();
+			sum = test.multiplyAll(dataStructure);
+			time = stopWatch.stop();
 			System.out.println("Multiply all with " + numberOfElements[i] + " elements in ArrayList. Sum: " + sum + " Time: " + time);
-		}	
+		}
 		
 		/* 
 		 * Testing the method multiplyAll with different number of elements

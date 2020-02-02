@@ -1,6 +1,8 @@
 package assignment_3;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Class containing method that tests execution time of algorithmic 
@@ -30,8 +32,15 @@ public class AlgorithmAndDatastructure {
 		// that the elements in list with an even number of elements is
 		// used once only, and for an uneven list, the middle element is squared
 		// in the final iteration
-		for (int i = 0, j = numberList.size()-1;   i <= j; i++, j--){
-			sum += numberList.get(i) * numberList.get(j);
+
+		ListIterator<Integer> itFirst = numberList.listIterator();
+		ListIterator<Integer> itLast = numberList.listIterator(numberList.size());
+		Integer currentFirst = itFirst.next();
+		Integer currentLast = itLast.previous();
+		while (itFirst.nextIndex() < itLast.previousIndex()){
+			sum += currentFirst * currentLast;
+			currentFirst = itFirst.next();
+			currentLast = itLast.previous();
 		}
 
 		return sum;		
@@ -46,10 +55,28 @@ public class AlgorithmAndDatastructure {
 	public long multiplyAll(List<Integer> numberList) {
 		long sum = 0;
 
-		for (int i = 0; i < numberList.size() -1; i++){
-			for (int j = i+1; j < numberList.size(); j++){
-				sum += numberList.get(i) * numberList.get(j);
+		int currentIndex = 0;
+		int size = numberList.size();
+		ListIterator<Integer> itOuter = numberList.listIterator(currentIndex);
+		currentIndex++;
+		ListIterator<Integer> itInner = numberList.listIterator(currentIndex);
+		boolean rightDir = true;
+		while (itOuter.nextIndex() < size ){
+			Integer currentOuter = itOuter.next();
+			if (rightDir) {
+				while (itInner.hasNext()) {
+					sum += currentOuter * itInner.next();
+				}
+			} else {
+				while (itInner.previousIndex() >= currentIndex){
+					sum += currentOuter * itInner.previous();
+				}
+				if (itInner.hasNext()) {
+					itInner.next();
+				}
 			}
+			rightDir = !rightDir;
+			currentIndex++;
 		}
 
 		return sum;		

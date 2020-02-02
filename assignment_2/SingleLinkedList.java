@@ -5,53 +5,55 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
     /**
      * Inner class to hold the structure objects
      */
-    private class ListNode{
-        private T mData = null;
-        private ListNode mNextNode = null;
-        public ListNode(T data){
-            mData = data;
+    private class Node {
+        private T mElement = null;
+        private Node mNextNode = null;
+        public Node(T element){
+            mElement = element;
         }
-        public void setData(T data){
-            mData = data;
+        public void setElement(T element){
+            mElement = element;
         }
-        public T getData(){
-            return mData;
+        public T getElement(){
+            return mElement;
         }
-        public void setNextNode(ListNode nextNode){
+        public void setNextNode(Node nextNode){
             mNextNode = nextNode;
         }
-        public ListNode getNextNode(){
+        public Node getNextNode(){
             return mNextNode;
         }
     }
 
-    private ListNode mHeadNode = null;
+    private Node mHeadNode = null;
+    private int mLength = 0;
 
     @Override
     public void add(T element) {
-        ListNode newNode = new ListNode(element);
+        Node newNode = new Node(element);
 
         if (mHeadNode == null){
             mHeadNode = newNode;
         } else {
             getLastNode().setNextNode(newNode);
         }
+
+        mLength++;
     }
 
     @Override
     public void add(int index, T element) throws IndexOutOfBoundsException {
         if (!isValidAddIndex(index)){
-            throw new IndexOutOfBoundsException("Unable to get index " + index +
-                    " in a single linked list with  elements");
+            throw new IndexOutOfBoundsException("add: index = " + index);
         }
-        ListNode newNode = new ListNode(element);
+        Node newNode = new Node(element);
 
         if (index == 0){
             newNode.setNextNode(mHeadNode);
             mHeadNode = newNode;
         }else {
             int currentIndex = index;
-            ListNode currentNode = mHeadNode;
+            Node currentNode = mHeadNode;
             while (currentIndex > 1){
                 currentNode = currentNode.getNextNode();
                 currentIndex--;
@@ -59,11 +61,13 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
             newNode.setNextNode(currentNode.getNextNode());
             currentNode.setNextNode(newNode);
         }
+        mLength++;
     }
 
     @Override
     public void clear() {
         mHeadNode = null;
+        mLength = 0;
     }
 
     private boolean isValidRemoveIndex(int index){
@@ -89,26 +93,25 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
     @Override
     public T get(int index) throws IndexOutOfBoundsException {
         if (!isValidRemoveIndex(index)){
-            throw new IndexOutOfBoundsException("Unable to get index " + index +
-                    " in a single linked list with  elements");
+            throw new IndexOutOfBoundsException("get: index = " + index);
         }
 
         int currentIndex = index;
-        ListNode currentNode = mHeadNode;
+        Node currentNode = mHeadNode;
         while(currentIndex > 0){
             currentIndex--;
             currentNode = currentNode.getNextNode();
         }
-        return currentNode.getData();
+        return currentNode.getElement();
     }
 
     @Override
     public int indexOf(T element) {
         int indexOf = -1;
         int currentIndex = 0;
-        ListNode currentNode = mHeadNode;
+        Node currentNode = mHeadNode;
         while (currentNode != null ){
-            if (currentNode.getData().equals(element)){
+            if (currentNode.getElement().equals(element)){
                 indexOf = currentIndex;
                 break;
             }
@@ -121,7 +124,7 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
     @Override
     public T remove(int index) throws IndexOutOfBoundsException {
         if (!isValidRemoveIndex(index)){
-            throw new IndexOutOfBoundsException("Unable to remove index " +index);
+            throw new IndexOutOfBoundsException("remove: index = " + index);
         }
 
         T returnData;
@@ -130,18 +133,19 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
         // we only need to repoint the head node
         // to the second index in the list
         if (index == 0){
-            returnData = mHeadNode.getData();
+            returnData = mHeadNode.getElement();
             mHeadNode = mHeadNode.getNextNode();
         } else {
-            ListNode currentNode = mHeadNode;
+            Node currentNode = mHeadNode;
             int currentIndex = index;
             while(currentIndex - 1 > 0){
                 currentNode = currentNode.getNextNode();
                 currentIndex--;
             }
-            returnData = currentNode.getNextNode().getData();
+            returnData = currentNode.getNextNode().getElement();
             currentNode.setNextNode(currentNode.getNextNode().getNextNode());
         }
+        mLength--;
         return returnData;
     }
 
@@ -149,32 +153,25 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
     public T set(int index, T element) throws IndexOutOfBoundsException {
         int size = size();
         if (index >= size || index < 0){
-            throw new IndexOutOfBoundsException(" Unable to set index " + index +
-                    " in a single linked list with " + size + " elements.");
+            throw new IndexOutOfBoundsException("Set: index = " + index);
         }
 
         T previousData;
-        ListNode currentNode = mHeadNode;
+        Node currentNode = mHeadNode;
         int currentIndex = index;
         while (currentIndex > 0){
             currentIndex--;
             currentNode = currentNode.getNextNode();
         }
-        previousData = currentNode.getData();
-        currentNode.setData(element);
+        previousData = currentNode.getElement();
+        currentNode.setElement(element);
 
         return previousData;
     }
 
     @Override
     public int size() {
-        int size = 0;
-        ListNode currentNode = mHeadNode;
-        while (currentNode != null){
-            size++;
-            currentNode = currentNode.getNextNode();
-        }
-        return size;
+        return mLength;
     }
 
     @Override
@@ -185,10 +182,10 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
             returnArray = null;
         } else {
          returnArray =(T[]) new Object[size];
-            ListNode currentNode = mHeadNode;
+            Node currentNode = mHeadNode;
             int currentIndex = 0;
             while (currentNode != null) {
-                returnArray[currentIndex] = currentNode.getData();
+                returnArray[currentIndex] = currentNode.getElement();
                 currentIndex++;
                 currentNode = currentNode.getNextNode();
             }
@@ -199,9 +196,9 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("[");
-        ListNode currentNode = mHeadNode;
+        Node currentNode = mHeadNode;
         while (currentNode != null){
-            stringBuilder.append(currentNode.getData().toString());
+            stringBuilder.append(currentNode.getElement().toString());
             if (currentNode.getNextNode() != null){
                 stringBuilder.append(", ");
             }
@@ -215,8 +212,8 @@ public class SingleLinkedList<T> implements ISingleLinkedList<T> {
      *
      * @return returns the last node in the single linked list
      */
-    private ListNode getLastNode(){
-        ListNode nextNode = mHeadNode;
+    private Node getLastNode(){
+        Node nextNode = mHeadNode;
         while(nextNode.getNextNode() != null){
             nextNode = nextNode.getNextNode();
         }

@@ -36,6 +36,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
     }
 
     private Node mHeadNode = null;
+    private int mLength = 0;
 
     @Override
     public void add(T element) {
@@ -47,17 +48,18 @@ public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
     public void add(int index, T element) throws IndexOutOfBoundsException {
         boolean shouldUpdateHead = index == 0;
         int size = size();
-        if (index <= size && index >= 0){
-            Node newNode = new Node(element);
-            Node currentNode = mHeadNode;
-            while (index > 0){
-                currentNode = currentNode.getNextNode();
-                index--;
-            }
-            addBeforeNode(currentNode, newNode);
-            if (shouldUpdateHead){
-                mHeadNode = newNode;
-            }
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException("add: index = " + index);
+        }
+        Node newNode = new Node(element);
+        Node currentNode = mHeadNode;
+        while (index > 0){
+            currentNode = currentNode.getNextNode();
+            index--;
+        }
+        addBeforeNode(currentNode, newNode);
+        if (shouldUpdateHead){
+            mHeadNode = newNode;
         }
     }
 
@@ -72,11 +74,13 @@ public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
             node.getPrevNode().setNextNode(newNode);
             node.setPrevNode(newNode);
         }
+        mLength++;
     }
 
     @Override
     public void clear() {
         mHeadNode = null;
+        mLength=0;
     }
 
     @Override
@@ -84,14 +88,15 @@ public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
         T returnElement = null;
 
         int size = size();
-        if (index < size && index >= 0){
-            Node currentNode = mHeadNode;
-            while (index > 0){
-                currentNode = currentNode.getNextNode();
-                index--;
-            }
-            returnElement = currentNode.getData();
+        if (index >= size || index < 0){
+            throw new IndexOutOfBoundsException("get: index = " + index);
         }
+        Node currentNode = mHeadNode;
+        while (index > 0){
+            currentNode = currentNode.getNextNode();
+            index--;
+        }
+        returnElement = currentNode.getData();
         return returnElement;
     }
 
@@ -162,6 +167,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
                 mHeadNode = nextNode;
             }
         }
+        mLength--;
     }
 
     @Override
@@ -184,16 +190,7 @@ public class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
 
     @Override
     public int size() {
-        int size = 0;
-        Node currentNode = mHeadNode;
-        if (mHeadNode != null){
-            do{
-                size++;
-                currentNode = currentNode.getNextNode();
-            }while (currentNode != mHeadNode);
-        }
-
-        return size;
+        return mLength;
     }
 
     @Override

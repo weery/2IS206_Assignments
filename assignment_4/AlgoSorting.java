@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class AlgoSorting {
 
-	private static final int NUMBER_OF_ITERATIONS = 30;
+	private static final int NUMBER_OF_ITERATIONS = 10;
 	private static final String SAVE_LOCATION = "2IS206_Utilities\\python\\assignment_4\\";
 	/**
 	 * Program entry point. Invokes sorting algorithms with different sizes.
@@ -39,66 +39,68 @@ public class AlgoSorting {
 		outputName = "InsertionSort.csv";
 		times.clear();
 		elements.clear();
-		
-		for(int i = 0; i < numberOfElements.length; i ++) {
+
+
+		for (int i = 0; i < numberOfElements.length; i++) {
 			elements.add(numberOfElements[i]);
 			time = 0;
-			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+			for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
 				dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
 				stopWatch.start();
 				sortingAlgorithm.sort(dataStructure);
 				time += stopWatch.stop();
 			}
-			System.out.println("Sorting " + numberOfElements[i] + " elements using Insertion sort. Time: " + time/NUMBER_OF_ITERATIONS);
-			times.add(time/NUMBER_OF_ITERATIONS);
+			System.out.println("Sorting " + numberOfElements[i] + " elements using Insertion sort. Time: " + time / NUMBER_OF_ITERATIONS);
+			times.add(time / NUMBER_OF_ITERATIONS);
 		}
-		writeToCsv(times, elements,outputName );
-		
-		/* 
-		 * Testing Drake sort on different number of elements. 
-		 */		
-		numberOfElements = new int[] {40000000, 80000000, 120000000, 160000000, 200000000};
+		writeToCsv(times, elements, outputName);
+
+		/*
+		 * Testing Drake sort on different number of elements.
+		 */
+		numberOfElements = new int[]{40000000, 80000000, 120000000, 160000000, 200000000};
 		sortingAlgorithm = new DrakeSort();
 		outputName = "DrakeSort.csv";
 		times.clear();
 		elements.clear();
 
-		for(int i = 0; i < numberOfElements.length; i ++) {
+		for (int i = 0; i < numberOfElements.length; i++) {
 			elements.add(numberOfElements[i]);
 			time = 0;
-			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+			for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
 				dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
 				stopWatch.start();
 				sortingAlgorithm.sort(dataStructure);
 				time += stopWatch.stop();
 			}
-			System.out.println("Sorting " + numberOfElements[i] + " elements using Drake sort. Time: " + time/NUMBER_OF_ITERATIONS);
-			times.add(time/NUMBER_OF_ITERATIONS);
+			System.out.println("Sorting " + numberOfElements[i] + " elements using Drake sort. Time: " + time / NUMBER_OF_ITERATIONS);
+			times.add(time / NUMBER_OF_ITERATIONS);
 		}
-		writeToCsv(times, elements,outputName );
+		writeToCsv(times, elements, outputName);
 
-		/* 
-		 * Testing Quick sort on different number of elements. 
-		 */		
-		numberOfElements = new int[] {4000000, 8000000, 12000000, 16000000, 20000000};
+		/*
+		 * Testing Quick sort on different number of elements.
+		 */
+		numberOfElements = new int[]{4000000, 8000000, 12000000, 16000000, 20000000};
 		sortingAlgorithm = new QuickSort();
 		outputName = "QuickSort.csv";
 		times.clear();
 		elements.clear();
 
-		for(int i = 0; i < numberOfElements.length; i ++) {
+		for (int i = 0; i < numberOfElements.length; i++) {
 			elements.add(numberOfElements[i]);
 			time = 0;
-			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+			for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
 				dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
 				stopWatch.start();
 				sortingAlgorithm.sort(dataStructure);
 				time += stopWatch.stop();
 			}
-			System.out.println("Sorting " + numberOfElements[i] + " elements using Quick sort. Time: " + time/NUMBER_OF_ITERATIONS);
-			times.add(time/NUMBER_OF_ITERATIONS);
+			System.out.println("Sorting " + numberOfElements[i] + " elements using Quick sort. Time: " + time / NUMBER_OF_ITERATIONS);
+			times.add(time / NUMBER_OF_ITERATIONS);
 		}
-		writeToCsv(times, elements,outputName );
+		writeToCsv(times, elements, outputName);
+
 
 		/* 
 		 * Testing Java API sort on different number of elements. 
@@ -110,13 +112,15 @@ public class AlgoSorting {
 		elements.clear();
 
 		for(int i = 0; i < numberOfElements.length; i ++) {
-			dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
 			elements.add(numberOfElements[i]);
-			stopWatch.start();
-			for (int t = 0; t < NUMBER_OF_ITERATIONS ; t++) {
+
+			time = 0;
+			for (int t = 0; t < NUMBER_OF_ITERATIONS; t++) {
+				dataStructure = NumberCreator.createNumberArrayInt(numberOfElements[i]);
+				stopWatch.start();
 				sortingAlgorithm.sort(dataStructure);
+				time += stopWatch.stop();
 			}
-			time = stopWatch.stop();
 			System.out.println("Sorting " + numberOfElements[i] + " elements using JavaAPI sort. Time: " + time/NUMBER_OF_ITERATIONS);
 			times.add(time/NUMBER_OF_ITERATIONS);
 		}

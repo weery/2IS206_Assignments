@@ -8,17 +8,14 @@ public class InsertionSort implements Sort {
 
 	@Override
 	public int[] sort(int[] unsorted) {
-		int[] sorted = new int[unsorted.length];
-		sorted[0] = unsorted[0];
 		for(int i = 1; i < unsorted.length; i++){
 			int j = i-1, current = unsorted[i];
-			sorted[i] = current;
-			while (sorted[j] > current){
-				sorted[j+1] = sorted[j];
-				sorted[j] = current;
+			while (j > 0 && unsorted[j] > current){
+				unsorted[j+1] = unsorted[j];
+				unsorted[j] = current;
 				j--;
 			}
 		}
-		return sorted;
+		return unsorted;
 	}	
 }

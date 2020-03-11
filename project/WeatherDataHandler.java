@@ -39,7 +39,7 @@ public class WeatherDataHandler {
 	 * @throws IOException if there is a problem while reading the file
 	 */
 	public void loadData(String filePath) throws IOException {
-		//Read all weather data
+		//Read all weather data from file and create a node from each line
 		List<String> fileData = Files.readAllLines(Paths.get(filePath));
 		mNodeList = new ArrayList<>(fileData.size());
 		for (String line : fileData){
@@ -88,6 +88,13 @@ public class WeatherDataHandler {
 		return averages;
 	}
 
+	/**
+	 * Finds the index of the first node for the given date.
+	 * Returns 0 if the entered date is before the first date in the given list.
+	 * Returns index of the lsat element if the date is after the last date.
+	 * @param date date of node to find (YYYY-MM-DD)
+	 * @return the index of the first element with the selected date
+	 */
 	public int findFirstNodeOfDate(LocalDate date){
 		int lower = 0,  upper = mListSize;
 
@@ -101,6 +108,7 @@ public class WeatherDataHandler {
 
 		while (true) {
 			int currentIndex = (lower + upper)/2;
+			// if we find the correct date, we need to iterate until we have the first of this date
 			if (mNodeList.get(currentIndex).date.isEqual(date)) {
 				while (currentIndex > 0) {
 					if (mNodeList.get(currentIndex).date.isBefore(date)) {
@@ -135,6 +143,9 @@ public class WeatherDataHandler {
 		Node currentNode = mNodeList.get(currentIndex);
 		while (!currentNode.date.isAfter(dateTo)){
 			LocalDate currentDate = currentNode.date;
+
+			// assume that the entry is missing until proven othervise. start with 24 missed entries
+			// and subtract this counter for each entry found during this day
 			int missingCounter = 24;
 			while (currentNode.date.isEqual(currentDate)){
 				missingCounter--;
